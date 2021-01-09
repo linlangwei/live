@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+
       	<title>1860203.com</title>
 
-        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
         <!-- 超链接无下划线,鼠标悬浮时有下划线 -->
         <style>a{ TEXT-DECORATION:none}a:hover{TEXT-DECORATION:underline }</style>
@@ -20,33 +20,11 @@
 
 <body>
 
-<table><tr>
-<td>本机时间&nbsp;&nbsp;</td>
-<td>
-<div id="dateTime"></div>
-    <script>
-        Date.prototype.format = function (fmt) {
-            var o = {
-                "y+": this.getFullYear, //年
-                "M+": this.getMonth() + 1, //月份
-                "d+": this.getDate(), //日
-                "h+": this.getHours(), //小时
-                "m+": this.getMinutes(), //分
-                "s+": this.getSeconds() //秒
-            };
-            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-            for (var k in o)
-                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-            return fmt;
-        }
-        setInterval("document.getElementById('dateTime').innerHTML = (new Date()).format('yyyy-MM-dd hh:mm:ss');", 1000);
-    </script>
-</td>
-</tr></table>
-
-<div class="well"><div class="embed-responsive embed-responsive-16by9"><center>
-<video id="video" style="max-height: 100%" class="embed-responsive-item video-js vjs-default-skin" poster="/pic/vlive.png" controls preload="auto" autoplay muted></video>
-</center></div></div>
+<center><table width="100%"><tr><td>
+<div class="well"><div class="embed-responsive embed-responsive-16by9">       
+<video id="video" style="max-height: 100%" class="embed-responsive-item video-js vjs-default-skin" poster="/pic/vlive.png" controls preload="auto" autoplay muted><$
+</div></div>
+</td></tr></table></center>
  
 <script>
   window.onload = function(){
@@ -87,12 +65,6 @@
 
 }
 </script>
-
-<!--
-<div class="well"><div class="embed-responsive embed-responsive-16by9">
-<video id="video01" src="/mov/swd.mp4" width="100%" type='video/mp4' poster="/pic/vlive.png" controls muted autoplay preload="metadata" ></video>
-</div></div>
--->
 
 </body>
 
