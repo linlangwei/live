@@ -3,22 +3,20 @@
 
 <head>
       	<title>DateTime</title>
-
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
         <!-- 超链接无下划线,鼠标悬浮时有下划线 -->
         <style>a{ TEXT-DECORATION:none}a:hover{TEXT-DECORATION:underline }</style>
-
 </head>
 
- 
 <body>
 
 <div style="color:white; font-size:18px; text-align:center;">
-
 <table width="100%"><tr><td><center>
 <div id="dateTime"></div>
-    <script>
+</center></td></tr></table>
+</div>
+
+<script>
         Date.prototype.format = function (fmt) {
             var o = {
                 "y+": this.getFullYear, //年
@@ -34,10 +32,7 @@
             return fmt;
         }
         setInterval("document.getElementById('dateTime').innerHTML = (new Date()).format('yyyy-MM-dd hh:mm:ss');", 1000);
-    </script>
-</center></td></tr></table>
-
-</div>
+</script>
 
 </body>
 
