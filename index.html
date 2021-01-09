@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      	<title>1860203.com</title>
+
+        <meta charset="utf-8">
+
+        <!-- 超链接无下划线,鼠标悬浮时有下划线 -->
+        <style>a{ TEXT-DECORATION:none}a:hover{TEXT-DECORATION:underline }</style>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+</head>
+
+ 
+<body>
+
+<table><tr>
+<td>本机时间&nbsp;&nbsp;</td>
+<td>
+<div id="dateTime"></div>
+    <script>
+        Date.prototype.format = function (fmt) {
+            var o = {
+                "y+": this.getFullYear, //年
+                "M+": this.getMonth() + 1, //月份
+                "d+": this.getDate(), //日
+                "h+": this.getHours(), //小时
+                "m+": this.getMinutes(), //分
+                "s+": this.getSeconds() //秒
+            };
+            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
+        setInterval("document.getElementById('dateTime').innerHTML = (new Date()).format('yyyy-MM-dd hh:mm:ss');", 1000);
+    </script>
+</td>
+</tr></table>
+
+<div class="well"><div class="embed-responsive embed-responsive-16by9"><center>
+<video id="video" style="max-height: 100%" class="embed-responsive-item video-js vjs-default-skin" poster="/pic/vlive.png" controls preload="auto" autoplay muted></video>
+</center></div></div>
+ 
+<script>
+  window.onload = function(){
+    var url = window.location.search;
+    var request = new Object();
+
+//    if(url.indexOf("?")==-1){
+//	alert ("请输入正确地址 http://1860203.com/?stream=xxx 或者 ?live=xxx");
+//    };
+
+    if(url.indexOf("?")!=-1){  <!--判断是否存在，如果返回-1，则表明不存在-->
+        var str = url.substr(1);   <!--从第1个字符开始截取-->
+        var strs = str.split("&"); <!--表示以“&’”为分隔符进行分隔，返回的是一个数组-->
+      	for(var i=0;i<strs.length;i++){
+        	request[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+      	}
+    }
+
+    var stream = request["stream"];
+    var live = request["live"];
+
+    if ( stream != null ) {
+        var src = "/stream/"+stream+".m3u8";
+    } else if ( live != null ) {
+	var src = "/live/"+live+".m3u8";
+    } else {
+	alert ("请输入正确地址 http://1860203.com?live=xxx 或者 ?stream=xxx");
+    }
+
+    if(Hls.isSupported()) {
+	var video = document.getElementById('video');
+	var hls = new Hls();
+	hls.loadSource(src);
+	hls.attachMedia(video);
+	hls.on(Hls.Events.MANIFEST_PARSED,function() {
+		video.play();
+	});
+    }
+
+}
+</script>
+
+<!--
+<div class="well"><div class="embed-responsive embed-responsive-16by9">
+<video id="video01" src="/mov/swd.mp4" width="100%" type='video/mp4' poster="/pic/vlive.png" controls muted autoplay preload="metadata" ></video>
+</div></div>
+-->
+
+</body>
+
+</html>
